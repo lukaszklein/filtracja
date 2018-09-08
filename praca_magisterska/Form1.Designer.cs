@@ -66,7 +66,8 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.LoadRefImg = new System.Windows.Forms.Button();
             this.LoadOrgImg = new System.Windows.Forms.Button();
-            this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
+            this.checkBoxBatch = new System.Windows.Forms.CheckBox();
+            this.checkBoxData = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxOriginal)).BeginInit();
             this.filtersBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageBoxFiltered)).BeginInit();
@@ -306,11 +307,16 @@
             // numericMinSigmaX
             // 
             this.numericMinSigmaX.Increment = new decimal(new int[] {
-            5,
+            20,
             0,
             0,
             0});
             this.numericMinSigmaX.Location = new System.Drawing.Point(218, 49);
+            this.numericMinSigmaX.Maximum = new decimal(new int[] {
+            201,
+            0,
+            0,
+            0});
             this.numericMinSigmaX.Minimum = new decimal(new int[] {
             1,
             0,
@@ -330,11 +336,16 @@
             // numericMinSigmaY
             // 
             this.numericMinSigmaY.Increment = new decimal(new int[] {
-            5,
+            20,
             0,
             0,
             0});
             this.numericMinSigmaY.Location = new System.Drawing.Point(218, 75);
+            this.numericMinSigmaY.Maximum = new decimal(new int[] {
+            201,
+            0,
+            0,
+            0});
             this.numericMinSigmaY.Minimum = new decimal(new int[] {
             1,
             0,
@@ -354,11 +365,16 @@
             // numericMaxSigmaX
             // 
             this.numericMaxSigmaX.Increment = new decimal(new int[] {
-            5,
+            20,
             0,
             0,
             0});
             this.numericMaxSigmaX.Location = new System.Drawing.Point(264, 49);
+            this.numericMaxSigmaX.Maximum = new decimal(new int[] {
+            201,
+            0,
+            0,
+            0});
             this.numericMaxSigmaX.Minimum = new decimal(new int[] {
             1,
             0,
@@ -378,11 +394,16 @@
             // numericMaxSigmaY
             // 
             this.numericMaxSigmaY.Increment = new decimal(new int[] {
-            5,
+            20,
             0,
             0,
             0});
             this.numericMaxSigmaY.Location = new System.Drawing.Point(264, 75);
+            this.numericMaxSigmaY.Maximum = new decimal(new int[] {
+            201,
+            0,
+            0,
+            0});
             this.numericMaxSigmaY.Minimum = new decimal(new int[] {
             1,
             0,
@@ -402,13 +423,13 @@
             // numericMinSigmaColor
             // 
             this.numericMinSigmaColor.Increment = new decimal(new int[] {
-            5,
+            20,
             0,
             0,
             0});
             this.numericMinSigmaColor.Location = new System.Drawing.Point(218, 101);
             this.numericMinSigmaColor.Maximum = new decimal(new int[] {
-            200,
+            202,
             0,
             0,
             0});
@@ -431,13 +452,13 @@
             // numericMaxSigmaColor
             // 
             this.numericMaxSigmaColor.Increment = new decimal(new int[] {
-            5,
+            20,
             0,
             0,
             0});
             this.numericMaxSigmaColor.Location = new System.Drawing.Point(264, 101);
             this.numericMaxSigmaColor.Maximum = new decimal(new int[] {
-            200,
+            202,
             0,
             0,
             0});
@@ -460,13 +481,13 @@
             // numericMaxSigmaSpace
             // 
             this.numericMaxSigmaSpace.Increment = new decimal(new int[] {
-            5,
+            20,
             0,
             0,
             0});
             this.numericMaxSigmaSpace.Location = new System.Drawing.Point(264, 127);
             this.numericMaxSigmaSpace.Maximum = new decimal(new int[] {
-            200,
+            202,
             0,
             0,
             0});
@@ -489,13 +510,13 @@
             // numericMinSigmaSpace
             // 
             this.numericMinSigmaSpace.Increment = new decimal(new int[] {
-            5,
+            20,
             0,
             0,
             0});
             this.numericMinSigmaSpace.Location = new System.Drawing.Point(218, 127);
             this.numericMinSigmaSpace.Maximum = new decimal(new int[] {
-            200,
+            202,
             0,
             0,
             0});
@@ -519,11 +540,16 @@
             // 
             this.numericUnsharpMaskMin.DecimalPlaces = 1;
             this.numericUnsharpMaskMin.Increment = new decimal(new int[] {
-            1,
+            5,
             0,
             0,
             65536});
             this.numericUnsharpMaskMin.Location = new System.Drawing.Point(218, 153);
+            this.numericUnsharpMaskMin.Maximum = new decimal(new int[] {
+            101,
+            0,
+            0,
+            65536});
             this.numericUnsharpMaskMin.Minimum = new decimal(new int[] {
             1,
             0,
@@ -544,11 +570,16 @@
             // 
             this.numericUnsharpMaskMax.DecimalPlaces = 1;
             this.numericUnsharpMaskMax.Increment = new decimal(new int[] {
-            1,
+            5,
             0,
             0,
             65536});
             this.numericUnsharpMaskMax.Location = new System.Drawing.Point(264, 153);
+            this.numericUnsharpMaskMax.Maximum = new decimal(new int[] {
+            101,
+            0,
+            0,
+            65536});
             this.numericUnsharpMaskMax.Minimum = new decimal(new int[] {
             1,
             0,
@@ -680,15 +711,34 @@
             this.LoadOrgImg.UseVisualStyleBackColor = true;
             this.LoadOrgImg.Click += new System.EventHandler(this.LoadOrgImg_Click);
             // 
-            // openFileDialog2
+            // checkBoxBatch
             // 
-            this.openFileDialog2.FileName = "openFileDialog1";
+            this.checkBoxBatch.AutoSize = true;
+            this.checkBoxBatch.Location = new System.Drawing.Point(53, 315);
+            this.checkBoxBatch.Name = "checkBoxBatch";
+            this.checkBoxBatch.Size = new System.Drawing.Size(111, 17);
+            this.checkBoxBatch.TabIndex = 34;
+            this.checkBoxBatch.Text = "Filtracja serii zdjęć";
+            this.checkBoxBatch.UseVisualStyleBackColor = true;
+            this.checkBoxBatch.CheckedChanged += new System.EventHandler(this.checkBoxBatch_CheckedChanged);
+            // 
+            // checkBoxData
+            // 
+            this.checkBoxData.AutoSize = true;
+            this.checkBoxData.Location = new System.Drawing.Point(338, 228);
+            this.checkBoxData.Name = "checkBoxData";
+            this.checkBoxData.Size = new System.Drawing.Size(117, 17);
+            this.checkBoxData.TabIndex = 35;
+            this.checkBoxData.Text = "Zapisuj tylko wyniki";
+            this.checkBoxData.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1078, 748);
+            this.Controls.Add(this.checkBoxData);
+            this.Controls.Add(this.checkBoxBatch);
             this.Controls.Add(this.LoadOrgImg);
             this.Controls.Add(this.LoadRefImg);
             this.Controls.Add(this.Clear);
@@ -719,6 +769,7 @@
             this.parametersBox.ResumeLayout(false);
             this.parametersBox.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -761,7 +812,8 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button LoadRefImg;
         private System.Windows.Forms.Button LoadOrgImg;
-        private System.Windows.Forms.OpenFileDialog openFileDialog2;
+        private System.Windows.Forms.CheckBox checkBoxBatch;
+        private System.Windows.Forms.CheckBox checkBoxData;
     }
 }
 

@@ -14,6 +14,7 @@ using Emgu.CV.Structure;
 using Emgu.CV.UI;
 using Emgu.CV.Util;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace praca_magisterska
 {
@@ -29,9 +30,52 @@ namespace praca_magisterska
             {
                 parametersBox.Enabled = false;
                 filtersBox.Enabled = false;
-                FilterChoice(imgToFilter, imgReference);
+                if (checkBoxBatch.Checked)
+                {
+                    AllFilters(sourcePath.Value, numPictureGood, extensionSourceFile.Value, imgReference);
+                }
+                else
+                {
+                    FilterChoice(imgToFilter, imgReference);
+                }
                 parametersBox.Enabled = true;
                 filtersBox.Enabled = true;
+            }
+        }
+
+        private void checkBoxBatch_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxBatch.Checked)
+            {
+                filtersBox.Enabled = false;
+                numericMinMask.Visible = true;
+                numericMaxMask.Visible = true;
+                numericMinSigmaX.Visible = true;
+                numericMaxSigmaX.Visible = true;
+                numericMinSigmaY.Visible = true;
+                numericMaxSigmaY.Visible = true;
+                numericMinSigmaColor.Visible = true;
+                numericMaxSigmaColor.Visible = true;
+                numericMinSigmaSpace.Visible = true;
+                numericMaxSigmaSpace.Visible = true;
+                numericUnsharpMaskMin.Visible = true;
+                numericUnsharpMaskMax.Visible = true;
+            }
+            else
+            {
+                filtersBox.Enabled = true;
+                numericMinMask.Visible = false;
+                numericMaxMask.Visible = false;
+                numericMinSigmaX.Visible = false;
+                numericMaxSigmaX.Visible = false;
+                numericMinSigmaY.Visible = false;
+                numericMaxSigmaY.Visible = false;
+                numericMinSigmaColor.Visible = false;
+                numericMaxSigmaColor.Visible = false;
+                numericMinSigmaSpace.Visible = false;
+                numericMaxSigmaSpace.Visible = false;
+                numericUnsharpMaskMin.Visible = false;
+                numericUnsharpMaskMax.Visible = false;
             }
         }
 
@@ -278,6 +322,7 @@ namespace praca_magisterska
 
         private void LoadOrgImg_Click(object sender, EventArgs e)
         {
+            openFileDialog1.Filter = "Grafika|*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff";
             DialogResult filedialog = openFileDialog1.ShowDialog();
             if (filedialog != DialogResult.OK || openFileDialog1.FileName == "")
             {
@@ -300,12 +345,25 @@ namespace praca_magisterska
                 MessageBox.Show("Nie otworzono pliku");
                 return;
             }
+
+            if (checkBoxBatch.Checked)
+            {
+                string extensionPattern = @"\..{3}";
+                string pathPattern = @"^(.*?)_";
+                string numPicturePattern = @"\\i(.{2})";
+                sourcePath = Regex.Match(openFileDialog1.FileName, pathPattern);
+                extensionSourceFile = Regex.Match(openFileDialog1.FileName, extensionPattern);
+                numPicture = Regex.Match(openFileDialog1.FileName, numPicturePattern);
+                numPictureGood = Regex.Replace(numPicture.Value, "[^A-Za-z0-9 ]", "");
+            }
+
             Image<Bgr, byte>  imgToFilterResized = imgToFilter.Resize(imageBoxOriginal.Width, imageBoxFiltered.Height, Inter.Linear);
             imageBoxOriginal.Image = imgToFilterResized;
         }
 
         private void LoadRefImg_Click(object sender, EventArgs e)
         {
+            openFileDialog1.Filter = "Grafika|*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff";
             DialogResult filedialog = openFileDialog1.ShowDialog();
             if (filedialog != DialogResult.OK || openFileDialog1.FileName == "")
             {
@@ -319,7 +377,7 @@ namespace praca_magisterska
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Wybrano plik inny niż obraz");
                 return;
             }
 
@@ -328,6 +386,7 @@ namespace praca_magisterska
                 MessageBox.Show("Nie otworzono pliku");
                 return;
             }
+
             imageBoxFiltered.Image = imgReference;
         }
 

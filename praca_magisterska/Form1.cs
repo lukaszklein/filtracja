@@ -14,6 +14,7 @@ using Emgu.CV.Structure;
 using Emgu.CV.UI;
 using Emgu.CV.Util;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace praca_magisterska
 {
@@ -28,9 +29,16 @@ namespace praca_magisterska
 
         string[] row = new string[14];
 
+        string numPictureGood;
+
         Image<Bgr, byte> imgToFilter,
                          imgReference;
+
         Stopwatch timer = new Stopwatch();
+
+        Match sourcePath,
+              extensionSourceFile,
+              numPicture;
 
         public Form1()
         {
@@ -57,14 +65,35 @@ namespace praca_magisterska
         void SaveResults(Image<Bgr, Byte> image, string filter, int size, int sigmaX, int sigmaY, double sigmaColor, 
             double sigmaSpace, float weight, string[] data)
         {
-            image.Save("C://obrazy//" + filter.ToString() + size.ToString() + sigmaX.ToString() + sigmaY.ToString() + sigmaColor.ToString()
-                + sigmaSpace.ToString() + weight.ToString() + ".bmp");
-            StreamWriter File = new StreamWriter("C://obrazy//ocena.txt", true);
-            string temp = "";
-            for (int x = 0; x < row.Length; x++)
+            if (!checkBoxData.Checked)
             {
-                temp = temp + row[x] + ", ";
+                image.Save("C://obrazy//" + filter.ToString() + size.ToString() + sigmaX.ToString() + sigmaY.ToString() + sigmaColor.ToString()
+                + sigmaSpace.ToString() + weight.ToString() + ".bmp");
             }
+            StreamWriter File = new StreamWriter("C://obrazy//ocena.txt", true);
+            string temp = "Filter name: " + filter.ToString() + ";Mask size: " + size.ToString() + ";SigmaX: " + sigmaX.ToString()
+                 + ";SigmaY: " + sigmaY.ToString() + ";Sigma color: " + sigmaColor.ToString() + ";Sigma space: " + sigmaSpace.ToString()
+                  + ";Mask weight: " + weight.ToString() + ";MSE: " + data[7].ToString() + ";MSD: " + data[8].ToString() + ";MED: " + data[9].ToString()
+                   + ";Marziliano: " + data[10].ToString() + ";JNB: " + data[11].ToString() + ";CPBD: " + data[12].ToString() + ";Time: " + data[13].ToString();
+            temp = temp + "\r\n";
+            File.Write(temp);
+            File.Close();
+        }
+
+        void SaveResults(Image<Bgr, Byte> image, string filter, int size, int sigmaX, int sigmaY, double sigmaColor,
+            double sigmaSpace, float weight, string[] data, string imageName)
+        {
+            if (!checkBoxData.Checked)
+            {
+                image.Save("C://obrazy//" + imageName + ";" + filter.ToString() + size.ToString() + sigmaX.ToString() + sigmaY.ToString() + sigmaColor.ToString()
+                + sigmaSpace.ToString() + weight.ToString() + ".bmp");
+            }
+            StreamWriter File = new StreamWriter("C://obrazy//ocena.txt", true);
+            string temp = imageName + ";";
+            temp = temp + "Filter name: " + filter.ToString() + ";Mask size: " + size.ToString() + ";SigmaX: " + sigmaX.ToString()
+                 + ";SigmaY: " + sigmaY.ToString() + ";Sigma color: " + sigmaColor.ToString() + ";Sigma space: " + sigmaSpace.ToString()
+                  + ";Mask weight: " + weight.ToString() + ";MSE: " + data[7].ToString() + ";MSD: " + data[8].ToString() + ";MED: " + data[9].ToString()
+                   + ";Marziliano: " + data[10].ToString() + ";JNB: " + data[11].ToString() + ";CPBD: " + data[12].ToString() + ";Time: " + data[13].ToString();
             temp = temp + "\r\n";
             File.Write(temp);
             File.Close();
@@ -312,6 +341,274 @@ namespace praca_magisterska
             }
 
             MessageBox.Show("Ukończono operacje");
+        }
+
+        void AllFilters(string path, string numPicture, string extension, Image<Bgr, Byte> imgReference)
+        {
+            Image<Bgr, Byte> imgFiltered;
+
+            int sizeMask = (int)numericMinMask.Value;
+            if (sizeMask % 2 == 0)
+            {
+                sizeMask++;
+            }
+
+            for (int numImage = 1; numImage <= 24; numImage++)
+            {
+                for (int distortionLvl = 1; distortionLvl <= 5; distortionLvl = distortionLvl + 4)
+                {
+                    string numPath;
+
+                    if (numImage < 10)
+                    {
+                        numPath = "0" + numImage.ToString() + "_" + distortionLvl.ToString();
+                    }
+                    else
+                    {
+                        numPath = numImage.ToString() + "_" + distortionLvl.ToString();
+                    }
+                    Image<Bgr,Byte> imgToFilter = new Image<Bgr, byte>(path + numPath + extension);
+                    imgFiltered = new Image<Bgr, byte>(imgToFilter.Size);
+
+                    // uśredniający
+                    {
+                        for (int i = sizeMask; i <= (int)numericMaxMask.Value; i = i + 2)
+                        {
+                            timer.Reset();
+                            timer.Start();
+                            CvInvoke.Blur(imgToFilter, imgFiltered, new Size(i, i), new Point(-1, -1));
+                            timer.Stop();
+                            EvaluationOfFilter(imgReference, imgFiltered);
+                            row[0] = "Filtr uśredniający";
+                            row[1] = i.ToString();
+                            row[2] = "-";
+                            row[3] = "-";
+                            row[4] = "-";
+                            row[5] = "-";
+                            row[6] = "-";
+                            row[7] = PSNRMSE.ToString();
+                            row[8] = PSNRMSD.ToString();
+                            row[9] = PSNRMED.ToString();
+                            row[10] = Marziliano.ToString();
+                            row[11] = JNB.ToString();
+                            row[12] = CPBD.ToString();
+                            row[13] = timer.Elapsed.TotalMilliseconds.ToString();
+                            ListViewItem listViewItem = new ListViewItem(row);
+                            listViewEval.Items.Add(listViewItem);
+                            SaveResults(imgFiltered, "Avg", i, 0, 0, 0, 0, 0, row, numPicture+numPath);
+                        }
+                    }
+
+                    // Gaussa
+                    {
+                        for (int i = sizeMask; i <= (int)numericMaxMask.Value; i = i + 2)
+                        {
+                            for (int j = (int)numericMinSigmaX.Value; j <= (int)numericMaxSigmaX.Value; j++)
+                            {
+                                for (int k = (int)numericMinSigmaY.Value; k <= (int)numericMaxSigmaY.Value; k++)
+                                {
+                                    timer.Reset();
+                                    timer.Start();
+                                    CvInvoke.GaussianBlur(imgToFilter, imgFiltered, new Size(i, i), j, k);
+                                    timer.Stop();
+                                    EvaluationOfFilter(imgReference, imgFiltered);
+                                    row[0] = "Filtr Gaussa";
+                                    row[1] = i.ToString();
+                                    row[2] = j.ToString();
+                                    row[3] = k.ToString();
+                                    row[4] = "-";
+                                    row[5] = "-";
+                                    row[6] = "-";
+                                    row[7] = PSNRMSE.ToString();
+                                    row[8] = PSNRMSD.ToString();
+                                    row[9] = PSNRMED.ToString();
+                                    row[10] = Marziliano.ToString();
+                                    row[11] = JNB.ToString();
+                                    row[12] = CPBD.ToString();
+                                    row[13] = timer.Elapsed.TotalMilliseconds.ToString();
+                                    ListViewItem listViewItem = new ListViewItem(row);
+                                    listViewEval.Items.Add(listViewItem);
+                                    SaveResults(imgFiltered, "Gauss", i, j, k, 0, 0, 0, row, numPicture + numPath);
+                                }
+                            }
+                        }
+                    }
+
+                    // medianowy
+                    {
+                        for (int i = sizeMask; i <= (int)numericMaxMask.Value; i = i + 2)
+                        {
+                            timer.Reset();
+                            timer.Start();
+                            CvInvoke.MedianBlur(imgToFilter, imgFiltered, i);
+                            timer.Stop();
+                            EvaluationOfFilter(imgReference, imgFiltered);
+                            row[0] = "Filtr medianowy";
+                            row[1] = i.ToString();
+                            row[2] = "-";
+                            row[3] = "-";
+                            row[4] = "-";
+                            row[5] = "-";
+                            row[6] = "-";
+                            row[7] = PSNRMSE.ToString();
+                            row[8] = PSNRMSD.ToString();
+                            row[9] = PSNRMED.ToString();
+                            row[10] = Marziliano.ToString();
+                            row[11] = JNB.ToString();
+                            row[12] = CPBD.ToString();
+                            row[13] = timer.Elapsed.TotalMilliseconds.ToString();
+                            ListViewItem listViewItem = new ListViewItem(row);
+                            listViewEval.Items.Add(listViewItem);
+                            SaveResults(imgFiltered, "Median", i, 0, 0, 0, 0, 0, row, numPicture + numPath);
+                        }
+                    }
+
+                    // bilateralny
+                    {
+                        for (double j = (double)numericMinSigmaColor.Value; j <= (double)numericMaxSigmaColor.Value; j++)
+                        {
+                            for (double k = (double)numericMinSigmaSpace.Value; k <= (double)numericMaxSigmaSpace.Value; k++)
+                            {
+                                timer.Reset();
+                                timer.Start();
+                                CvInvoke.BilateralFilter(imgToFilter, imgFiltered, -1, j, k);
+                                timer.Stop();
+                                EvaluationOfFilter(imgReference, imgFiltered);
+                                row[0] = "Filtr bilateralny";
+                                row[1] = "-";
+                                row[2] = "-";
+                                row[3] = "-";
+                                row[4] = j.ToString();
+                                row[5] = k.ToString();
+                                row[6] = "-";
+                                row[7] = PSNRMSE.ToString();
+                                row[8] = PSNRMSD.ToString();
+                                row[9] = PSNRMED.ToString();
+                                row[10] = Marziliano.ToString();
+                                row[11] = JNB.ToString();
+                                row[12] = CPBD.ToString();
+                                row[13] = timer.Elapsed.TotalMilliseconds.ToString();
+                                ListViewItem listViewItem = new ListViewItem(row);
+                                listViewEval.Items.Add(listViewItem);
+                                SaveResults(imgFiltered, "Bilateral", -1, 0, 0, j, k, 0, row, numPicture + numPath);
+                            }
+                        }
+                    }
+
+                    // Kuwahara
+                    {
+                        for (int i = sizeMask; i <= (int)numericMaxMask.Value; i = i + 2)
+                        {
+                            timer.Reset();
+                            timer.Start();
+                            imgFiltered = KuwaharaFilter(imgToFilter, i);
+                            timer.Stop();
+                            EvaluationOfFilter(imgReference, imgFiltered);
+                            row[0] = "Filtr Kuwahara";
+                            row[1] = i.ToString();
+                            row[2] = "-";
+                            row[3] = "-";
+                            row[4] = "-";
+                            row[6] = "-";
+                            row[7] = PSNRMSE.ToString();
+                            row[8] = PSNRMSD.ToString();
+                            row[9] = PSNRMED.ToString();
+                            row[10] = Marziliano.ToString();
+                            row[11] = JNB.ToString();
+                            row[12] = CPBD.ToString();
+                            row[13] = timer.Elapsed.TotalMilliseconds.ToString();
+                            ListViewItem listViewItem = new ListViewItem(row);
+                            listViewEval.Items.Add(listViewItem);
+                            SaveResults(imgFiltered, "Kuwahara", i, 0, 0, 0, 0, 0, row, numPicture + numPath);
+                        }
+                    }
+
+                    // unsharp masking
+                    {
+                        for (int i = sizeMask; i <= (int)numericMaxMask.Value; i = i + 2)
+                        {
+                            float j = (float)numericUnsharpMaskMin.Value;
+                            for (; j <= (float)numericUnsharpMaskMax.Value; j = (float)(j + 0.05))
+                            {
+                                timer.Reset();
+                                timer.Start();
+                                imgFiltered = UnsharpMasking(imgToFilter, i, j);
+                                timer.Stop();
+                                EvaluationOfFilter(imgReference, imgFiltered);
+                                row[0] = "Unsharp masking";
+                                row[1] = i.ToString();
+                                row[2] = "-";
+                                row[3] = "-";
+                                row[4] = "-";
+                                row[5] = "-";
+                                row[6] = j.ToString();
+                                row[7] = PSNRMSE.ToString();
+                                row[8] = PSNRMSD.ToString();
+                                row[9] = PSNRMED.ToString();
+                                row[10] = Marziliano.ToString();
+                                row[11] = JNB.ToString();
+                                row[12] = CPBD.ToString();
+                                row[13] = timer.Elapsed.TotalMilliseconds.ToString();
+                                ListViewItem listViewItem = new ListViewItem(row);
+                                listViewEval.Items.Add(listViewItem);
+                                SaveResults(imgFiltered, "Unsharp", i, 0, 0, 0, 0, j, row, numPicture + numPath);
+                            }
+                        }
+                    }
+
+                    // wyrówanie histogramu
+                    {
+                        timer.Reset();
+                        timer.Start();
+                        imgFiltered = EqualizeHistogram(imgToFilter);
+                        timer.Stop();
+                        EvaluationOfFilter(imgReference, imgFiltered);
+                        row[0] = "Wyrownanie";
+                        row[1] = "-";
+                        row[2] = "-";
+                        row[3] = "-";
+                        row[4] = "-";
+                        row[5] = "-";
+                        row[6] = "-";
+                        row[7] = PSNRMSE.ToString();
+                        row[8] = PSNRMSD.ToString();
+                        row[9] = PSNRMED.ToString();
+                        row[10] = Marziliano.ToString();
+                        row[11] = JNB.ToString();
+                        row[12] = CPBD.ToString();
+                        row[13] = timer.Elapsed.TotalMilliseconds.ToString();
+                        ListViewItem listViewItem = new ListViewItem(row);
+                        listViewEval.Items.Add(listViewItem);
+                        SaveResults(imgFiltered, "Eq", 0, 0, 0, 0, 0, 0, row, numPicture + numPath);
+                    }
+
+                    // rozciągnięcie histogramu
+                    {
+                        timer.Reset();
+                        timer.Start();
+                        imgFiltered = StretchHistogram(imgToFilter);
+                        timer.Stop();
+                        EvaluationOfFilter(imgReference, imgFiltered);
+                        row[0] = "Rozciągniecie";
+                        row[1] = "-";
+                        row[2] = "-";
+                        row[3] = "-";
+                        row[4] = "-";
+                        row[5] = "-";
+                        row[6] = "-";
+                        row[7] = PSNRMSE.ToString();
+                        row[8] = PSNRMSD.ToString();
+                        row[9] = PSNRMED.ToString();
+                        row[10] = Marziliano.ToString();
+                        row[11] = JNB.ToString();
+                        row[12] = CPBD.ToString();
+                        row[13] = timer.Elapsed.TotalMilliseconds.ToString();
+                        ListViewItem listViewItem = new ListViewItem(row);
+                        listViewEval.Items.Add(listViewItem);
+                        SaveResults(imgFiltered, "Str", 0, 0, 0, 0, 0, 0, row, numPicture + numPath);
+                    }
+                }
+            }
         }
     }
 }
