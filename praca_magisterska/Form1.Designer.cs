@@ -46,9 +46,7 @@
             this.numericMinMask = new System.Windows.Forms.NumericUpDown();
             this.numericMaxMask = new System.Windows.Forms.NumericUpDown();
             this.numericMinSigmaX = new System.Windows.Forms.NumericUpDown();
-            this.numericMinSigmaY = new System.Windows.Forms.NumericUpDown();
             this.numericMaxSigmaX = new System.Windows.Forms.NumericUpDown();
-            this.numericMaxSigmaY = new System.Windows.Forms.NumericUpDown();
             this.numericMinSigmaColor = new System.Windows.Forms.NumericUpDown();
             this.numericMaxSigmaColor = new System.Windows.Forms.NumericUpDown();
             this.numericMaxSigmaSpace = new System.Windows.Forms.NumericUpDown();
@@ -59,7 +57,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.Clear = new System.Windows.Forms.Button();
@@ -74,9 +71,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericMinMask)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMaxMask)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMinSigmaX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericMinSigmaY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMaxSigmaX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericMaxSigmaY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMinSigmaColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMaxSigmaColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMaxSigmaSpace)).BeginInit();
@@ -88,7 +83,7 @@
             // 
             // imageBoxOriginal
             // 
-            this.imageBoxOriginal.Location = new System.Drawing.Point(763, 23);
+            this.imageBoxOriginal.Location = new System.Drawing.Point(608, 21);
             this.imageBoxOriginal.Name = "imageBoxOriginal";
             this.imageBoxOriginal.Size = new System.Drawing.Size(255, 255);
             this.imageBoxOriginal.TabIndex = 2;
@@ -222,7 +217,7 @@
             // 
             // Start
             // 
-            this.Start.Location = new System.Drawing.Point(85, 282);
+            this.Start.Location = new System.Drawing.Point(361, 286);
             this.Start.Name = "Start";
             this.Start.Size = new System.Drawing.Size(75, 23);
             this.Start.TabIndex = 4;
@@ -232,9 +227,9 @@
             // 
             // imageBoxFiltered
             // 
-            this.imageBoxFiltered.Location = new System.Drawing.Point(763, 282);
+            this.imageBoxFiltered.Location = new System.Drawing.Point(882, 21);
             this.imageBoxFiltered.Name = "imageBoxFiltered";
-            this.imageBoxFiltered.Size = new System.Drawing.Size(277, 235);
+            this.imageBoxFiltered.Size = new System.Drawing.Size(255, 255);
             this.imageBoxFiltered.TabIndex = 5;
             this.imageBoxFiltered.TabStop = false;
             // 
@@ -242,7 +237,7 @@
             // 
             this.listViewEval.Location = new System.Drawing.Point(32, 350);
             this.listViewEval.Name = "listViewEval";
-            this.listViewEval.Size = new System.Drawing.Size(685, 97);
+            this.listViewEval.Size = new System.Drawing.Size(1196, 245);
             this.listViewEval.TabIndex = 15;
             this.listViewEval.UseCompatibleStateImageBehavior = false;
             // 
@@ -255,7 +250,7 @@
             0});
             this.numericMinMask.Location = new System.Drawing.Point(218, 23);
             this.numericMinMask.Maximum = new decimal(new int[] {
-            101,
+            15,
             0,
             0,
             0});
@@ -284,7 +279,7 @@
             0});
             this.numericMaxMask.Location = new System.Drawing.Point(264, 23);
             this.numericMaxMask.Maximum = new decimal(new int[] {
-            101,
+            15,
             0,
             0,
             0});
@@ -307,13 +302,13 @@
             // numericMinSigmaX
             // 
             this.numericMinSigmaX.Increment = new decimal(new int[] {
-            20,
+            30,
             0,
             0,
             0});
             this.numericMinSigmaX.Location = new System.Drawing.Point(218, 49);
             this.numericMinSigmaX.Maximum = new decimal(new int[] {
-            201,
+            151,
             0,
             0,
             0});
@@ -333,45 +328,16 @@
             this.numericMinSigmaX.Visible = false;
             this.numericMinSigmaX.ValueChanged += new System.EventHandler(this.numericMinSigmaX_ValueChanged);
             // 
-            // numericMinSigmaY
-            // 
-            this.numericMinSigmaY.Increment = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.numericMinSigmaY.Location = new System.Drawing.Point(218, 75);
-            this.numericMinSigmaY.Maximum = new decimal(new int[] {
-            201,
-            0,
-            0,
-            0});
-            this.numericMinSigmaY.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericMinSigmaY.Name = "numericMinSigmaY";
-            this.numericMinSigmaY.Size = new System.Drawing.Size(40, 20);
-            this.numericMinSigmaY.TabIndex = 19;
-            this.numericMinSigmaY.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericMinSigmaY.Visible = false;
-            this.numericMinSigmaY.ValueChanged += new System.EventHandler(this.numericMinSigmaY_ValueChanged);
-            // 
             // numericMaxSigmaX
             // 
             this.numericMaxSigmaX.Increment = new decimal(new int[] {
-            20,
+            30,
             0,
             0,
             0});
             this.numericMaxSigmaX.Location = new System.Drawing.Point(264, 49);
             this.numericMaxSigmaX.Maximum = new decimal(new int[] {
-            201,
+            151,
             0,
             0,
             0});
@@ -391,45 +357,16 @@
             this.numericMaxSigmaX.Visible = false;
             this.numericMaxSigmaX.ValueChanged += new System.EventHandler(this.numericMaxSigmaX_ValueChanged);
             // 
-            // numericMaxSigmaY
-            // 
-            this.numericMaxSigmaY.Increment = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.numericMaxSigmaY.Location = new System.Drawing.Point(264, 75);
-            this.numericMaxSigmaY.Maximum = new decimal(new int[] {
-            201,
-            0,
-            0,
-            0});
-            this.numericMaxSigmaY.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericMaxSigmaY.Name = "numericMaxSigmaY";
-            this.numericMaxSigmaY.Size = new System.Drawing.Size(40, 20);
-            this.numericMaxSigmaY.TabIndex = 21;
-            this.numericMaxSigmaY.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericMaxSigmaY.Visible = false;
-            this.numericMaxSigmaY.ValueChanged += new System.EventHandler(this.numericMaxSigmaY_ValueChanged);
-            // 
             // numericMinSigmaColor
             // 
             this.numericMinSigmaColor.Increment = new decimal(new int[] {
-            20,
+            30,
             0,
             0,
             0});
-            this.numericMinSigmaColor.Location = new System.Drawing.Point(218, 101);
+            this.numericMinSigmaColor.Location = new System.Drawing.Point(218, 77);
             this.numericMinSigmaColor.Maximum = new decimal(new int[] {
-            202,
+            152,
             0,
             0,
             0});
@@ -452,13 +389,13 @@
             // numericMaxSigmaColor
             // 
             this.numericMaxSigmaColor.Increment = new decimal(new int[] {
-            20,
+            30,
             0,
             0,
             0});
-            this.numericMaxSigmaColor.Location = new System.Drawing.Point(264, 101);
+            this.numericMaxSigmaColor.Location = new System.Drawing.Point(264, 77);
             this.numericMaxSigmaColor.Maximum = new decimal(new int[] {
-            202,
+            152,
             0,
             0,
             0});
@@ -481,13 +418,13 @@
             // numericMaxSigmaSpace
             // 
             this.numericMaxSigmaSpace.Increment = new decimal(new int[] {
-            20,
+            30,
             0,
             0,
             0});
-            this.numericMaxSigmaSpace.Location = new System.Drawing.Point(264, 127);
+            this.numericMaxSigmaSpace.Location = new System.Drawing.Point(264, 103);
             this.numericMaxSigmaSpace.Maximum = new decimal(new int[] {
-            202,
+            152,
             0,
             0,
             0});
@@ -510,13 +447,13 @@
             // numericMinSigmaSpace
             // 
             this.numericMinSigmaSpace.Increment = new decimal(new int[] {
-            20,
+            30,
             0,
             0,
             0});
-            this.numericMinSigmaSpace.Location = new System.Drawing.Point(218, 127);
+            this.numericMinSigmaSpace.Location = new System.Drawing.Point(218, 103);
             this.numericMinSigmaSpace.Maximum = new decimal(new int[] {
-            202,
+            152,
             0,
             0,
             0});
@@ -544,9 +481,9 @@
             0,
             0,
             65536});
-            this.numericUnsharpMaskMin.Location = new System.Drawing.Point(218, 153);
+            this.numericUnsharpMaskMin.Location = new System.Drawing.Point(218, 129);
             this.numericUnsharpMaskMin.Maximum = new decimal(new int[] {
-            101,
+            31,
             0,
             0,
             65536});
@@ -574,9 +511,9 @@
             0,
             0,
             65536});
-            this.numericUnsharpMaskMax.Location = new System.Drawing.Point(264, 153);
+            this.numericUnsharpMaskMax.Location = new System.Drawing.Point(264, 129);
             this.numericUnsharpMaskMax.Maximum = new decimal(new int[] {
-            101,
+            31,
             0,
             0,
             65536});
@@ -601,7 +538,6 @@
             this.parametersBox.Controls.Add(this.label6);
             this.parametersBox.Controls.Add(this.label5);
             this.parametersBox.Controls.Add(this.label4);
-            this.parametersBox.Controls.Add(this.label3);
             this.parametersBox.Controls.Add(this.label2);
             this.parametersBox.Controls.Add(this.label1);
             this.parametersBox.Controls.Add(this.numericMinMask);
@@ -611,14 +547,12 @@
             this.parametersBox.Controls.Add(this.numericUnsharpMaskMin);
             this.parametersBox.Controls.Add(this.numericMaxSigmaX);
             this.parametersBox.Controls.Add(this.numericMaxSigmaSpace);
-            this.parametersBox.Controls.Add(this.numericMinSigmaY);
             this.parametersBox.Controls.Add(this.numericMinSigmaSpace);
-            this.parametersBox.Controls.Add(this.numericMaxSigmaY);
             this.parametersBox.Controls.Add(this.numericMaxSigmaColor);
             this.parametersBox.Controls.Add(this.numericMinSigmaColor);
             this.parametersBox.Location = new System.Drawing.Point(264, 23);
             this.parametersBox.Name = "parametersBox";
-            this.parametersBox.Size = new System.Drawing.Size(310, 198);
+            this.parametersBox.Size = new System.Drawing.Size(310, 163);
             this.parametersBox.TabIndex = 29;
             this.parametersBox.TabStop = false;
             this.parametersBox.Text = "Parametry";
@@ -626,7 +560,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 155);
+            this.label6.Location = new System.Drawing.Point(6, 131);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(66, 13);
             this.label6.TabIndex = 33;
@@ -635,7 +569,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 129);
+            this.label5.Location = new System.Drawing.Point(6, 105);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(124, 13);
             this.label5.TabIndex = 32;
@@ -644,29 +578,20 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 103);
+            this.label4.Location = new System.Drawing.Point(6, 79);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(108, 13);
             this.label4.TabIndex = 31;
             this.label4.Text = "Odchylenie w kolorze";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 77);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(166, 13);
-            this.label3.TabIndex = 30;
-            this.label3.Text = "Odchylenie standardowe w pionie";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(6, 51);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(179, 13);
+            this.label2.Size = new System.Drawing.Size(202, 13);
             this.label2.TabIndex = 29;
-            this.label2.Text = "Odchylenie standardowe w poziomie";
+            this.label2.Text = "Odchylenie standardowe dla filtru Gaussa";
             // 
             // label1
             // 
@@ -679,11 +604,11 @@
             // 
             // Clear
             // 
-            this.Clear.Location = new System.Drawing.Point(528, 282);
+            this.Clear.Location = new System.Drawing.Point(472, 288);
             this.Clear.Name = "Clear";
-            this.Clear.Size = new System.Drawing.Size(75, 23);
+            this.Clear.Size = new System.Drawing.Size(96, 23);
             this.Clear.TabIndex = 30;
-            this.Clear.Text = "Wyczyść";
+            this.Clear.Text = "Wyczyść listę";
             this.Clear.UseVisualStyleBackColor = true;
             this.Clear.Click += new System.EventHandler(this.Clear_Click);
             // 
@@ -693,7 +618,7 @@
             // 
             // LoadRefImg
             // 
-            this.LoadRefImg.Location = new System.Drawing.Point(172, 311);
+            this.LoadRefImg.Location = new System.Drawing.Point(176, 311);
             this.LoadRefImg.Name = "LoadRefImg";
             this.LoadRefImg.Size = new System.Drawing.Size(144, 23);
             this.LoadRefImg.TabIndex = 31;
@@ -703,7 +628,7 @@
             // 
             // LoadOrgImg
             // 
-            this.LoadOrgImg.Location = new System.Drawing.Point(172, 282);
+            this.LoadOrgImg.Location = new System.Drawing.Point(176, 286);
             this.LoadOrgImg.Name = "LoadOrgImg";
             this.LoadOrgImg.Size = new System.Drawing.Size(144, 23);
             this.LoadOrgImg.TabIndex = 33;
@@ -725,7 +650,7 @@
             // checkBoxData
             // 
             this.checkBoxData.AutoSize = true;
-            this.checkBoxData.Location = new System.Drawing.Point(338, 228);
+            this.checkBoxData.Location = new System.Drawing.Point(53, 292);
             this.checkBoxData.Name = "checkBoxData";
             this.checkBoxData.Size = new System.Drawing.Size(117, 17);
             this.checkBoxData.TabIndex = 35;
@@ -736,7 +661,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1078, 748);
+            this.ClientSize = new System.Drawing.Size(1284, 861);
             this.Controls.Add(this.checkBoxData);
             this.Controls.Add(this.checkBoxBatch);
             this.Controls.Add(this.LoadOrgImg);
@@ -757,9 +682,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericMinMask)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMaxMask)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMinSigmaX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericMinSigmaY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMaxSigmaX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericMaxSigmaY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMinSigmaColor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMaxSigmaColor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMaxSigmaSpace)).EndInit();
@@ -788,9 +711,7 @@
         private System.Windows.Forms.NumericUpDown numericMinMask;
         private System.Windows.Forms.NumericUpDown numericMaxMask;
         private System.Windows.Forms.NumericUpDown numericMinSigmaX;
-        private System.Windows.Forms.NumericUpDown numericMinSigmaY;
         private System.Windows.Forms.NumericUpDown numericMaxSigmaX;
-        private System.Windows.Forms.NumericUpDown numericMaxSigmaY;
         private System.Windows.Forms.NumericUpDown numericMinSigmaColor;
         private System.Windows.Forms.NumericUpDown numericMaxSigmaColor;
         private System.Windows.Forms.NumericUpDown numericMaxSigmaSpace;
@@ -805,7 +726,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button Clear;

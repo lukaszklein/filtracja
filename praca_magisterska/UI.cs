@@ -52,8 +52,6 @@ namespace praca_magisterska
                 numericMaxMask.Visible = true;
                 numericMinSigmaX.Visible = true;
                 numericMaxSigmaX.Visible = true;
-                numericMinSigmaY.Visible = true;
-                numericMaxSigmaY.Visible = true;
                 numericMinSigmaColor.Visible = true;
                 numericMaxSigmaColor.Visible = true;
                 numericMinSigmaSpace.Visible = true;
@@ -68,8 +66,6 @@ namespace praca_magisterska
                 numericMaxMask.Visible = false;
                 numericMinSigmaX.Visible = false;
                 numericMaxSigmaX.Visible = false;
-                numericMinSigmaY.Visible = false;
-                numericMaxSigmaY.Visible = false;
                 numericMinSigmaColor.Visible = false;
                 numericMaxSigmaColor.Visible = false;
                 numericMinSigmaSpace.Visible = false;
@@ -85,8 +81,6 @@ namespace praca_magisterska
             numericMaxMask.Visible = true;
             numericMinSigmaX.Visible = false;
             numericMaxSigmaX.Visible = false;
-            numericMinSigmaY.Visible = false;
-            numericMaxSigmaY.Visible = false;
             numericMinSigmaColor.Visible = false;
             numericMaxSigmaColor.Visible = false;
             numericMinSigmaSpace.Visible = false;
@@ -101,8 +95,6 @@ namespace praca_magisterska
             numericMaxMask.Visible = true;
             numericMinSigmaX.Visible = true;
             numericMaxSigmaX.Visible = true;
-            numericMinSigmaY.Visible = true;
-            numericMaxSigmaY.Visible = true;
             numericMinSigmaColor.Visible = false;
             numericMaxSigmaColor.Visible = false;
             numericMinSigmaSpace.Visible = false;
@@ -117,8 +109,6 @@ namespace praca_magisterska
             numericMaxMask.Visible = false;
             numericMinSigmaX.Visible = false;
             numericMaxSigmaX.Visible = false;
-            numericMinSigmaY.Visible = false;
-            numericMaxSigmaY.Visible = false;
             numericMinSigmaColor.Visible = false;
             numericMaxSigmaColor.Visible = false;
             numericMinSigmaSpace.Visible = false;
@@ -133,8 +123,6 @@ namespace praca_magisterska
             numericMaxMask.Visible = true;
             numericMinSigmaX.Visible = false;
             numericMaxSigmaX.Visible = false;
-            numericMinSigmaY.Visible = false;
-            numericMaxSigmaY.Visible = false;
             numericMinSigmaColor.Visible = false;
             numericMaxSigmaColor.Visible = false;
             numericMinSigmaSpace.Visible = false;
@@ -149,8 +137,6 @@ namespace praca_magisterska
             numericMaxMask.Visible = false;
             numericMinSigmaX.Visible = false;
             numericMaxSigmaX.Visible = false;
-            numericMinSigmaY.Visible = false;
-            numericMaxSigmaY.Visible = false;
             numericMinSigmaColor.Visible = true;
             numericMaxSigmaColor.Visible = true;
             numericMinSigmaSpace.Visible = true;
@@ -165,8 +151,6 @@ namespace praca_magisterska
             numericMaxMask.Visible = true;
             numericMinSigmaX.Visible = false;
             numericMaxSigmaX.Visible = false;
-            numericMinSigmaY.Visible = false;
-            numericMaxSigmaY.Visible = false;
             numericMinSigmaColor.Visible = false;
             numericMaxSigmaColor.Visible = false;
             numericMinSigmaSpace.Visible = false;
@@ -181,8 +165,6 @@ namespace praca_magisterska
             numericMaxMask.Visible = true;
             numericMinSigmaX.Visible = false;
             numericMaxSigmaX.Visible = false;
-            numericMinSigmaY.Visible = false;
-            numericMaxSigmaY.Visible = false;
             numericMinSigmaColor.Visible = false;
             numericMaxSigmaColor.Visible = false;
             numericMinSigmaSpace.Visible = false;
@@ -197,8 +179,6 @@ namespace praca_magisterska
             numericMaxMask.Visible = false;
             numericMinSigmaX.Visible = false;
             numericMaxSigmaX.Visible = false;
-            numericMinSigmaY.Visible = false;
-            numericMaxSigmaY.Visible = false;
             numericMinSigmaColor.Visible = false;
             numericMaxSigmaColor.Visible = false;
             numericMinSigmaSpace.Visible = false;
@@ -213,8 +193,6 @@ namespace praca_magisterska
             numericMaxMask.Visible = false;
             numericMinSigmaX.Visible = false;
             numericMaxSigmaX.Visible = false;
-            numericMinSigmaY.Visible = false;
-            numericMaxSigmaY.Visible = false;
             numericMinSigmaColor.Visible = false;
             numericMaxSigmaColor.Visible = false;
             numericMinSigmaSpace.Visible = false;
@@ -253,14 +231,6 @@ namespace praca_magisterska
             if (numericMinSigmaX.Value > numericMaxSigmaX.Value)
             {
                 numericMaxSigmaX.Value = numericMinSigmaX.Value;
-            }
-        }
-
-        private void numericMinSigmaY_ValueChanged(object sender, EventArgs e)
-        {
-            if (numericMinSigmaY.Value > numericMaxSigmaY.Value)
-            {
-                numericMinSigmaY.Value = numericMaxSigmaY.Value;
             }
         }
 
@@ -309,14 +279,6 @@ namespace praca_magisterska
             if (numericUnsharpMaskMin.Value > numericUnsharpMaskMax.Value)
             {
                 numericUnsharpMaskMax.Value = numericUnsharpMaskMin.Value;
-            }
-        }
-
-        private void numericMaxSigmaY_ValueChanged(object sender, EventArgs e)
-        {
-            if (numericMinSigmaY.Value > numericMaxSigmaY.Value)
-            {
-                numericMaxSigmaY.Value = numericMinSigmaY.Value;
             }
         }
 
