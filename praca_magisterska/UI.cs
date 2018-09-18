@@ -36,170 +36,118 @@ namespace praca_magisterska
                 }
                 else
                 {
-                    FilterChoice(imgToFilter, imgReference);
+                    FilterChoice(imgToFilter, imgReference, numPictureGood, numDistortionGood, numIntensityGood);
                 }
                 parametersBox.Enabled = true;
                 filtersBox.Enabled = true;
             }
         }
 
-        private void checkBoxBatch_CheckedChanged(object sender, EventArgs e)
+        private void radioAvg_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxBatch.Checked)
+            if (radioAvg.Checked)
             {
-                filtersBox.Enabled = false;
+                numericMinMask.Visible = true;
+                numericMaxMask.Visible = true;
+            }
+            else if (!radioGauss.Checked && !radioMedian.Checked && !radioKuwahara.Checked && !radioUnsharp.Checked)
+            {
+                numericMinMask.Visible = false;
+                numericMaxMask.Visible = false;
+            }
+        }
+
+        private void radioGauss_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioGauss.Checked)
+            {
                 numericMinMask.Visible = true;
                 numericMaxMask.Visible = true;
                 numericMinSigmaX.Visible = true;
                 numericMaxSigmaX.Visible = true;
-                numericMinSigmaColor.Visible = true;
-                numericMaxSigmaColor.Visible = true;
-                numericMinSigmaSpace.Visible = true;
-                numericMaxSigmaSpace.Visible = true;
-                numericUnsharpMaskMin.Visible = true;
-                numericUnsharpMaskMax.Visible = true;
             }
-            else
+            else if (!radioAvg.Checked && !radioMedian.Checked && !radioKuwahara.Checked && !radioUnsharp.Checked)
             {
-                filtersBox.Enabled = true;
                 numericMinMask.Visible = false;
                 numericMaxMask.Visible = false;
                 numericMinSigmaX.Visible = false;
                 numericMaxSigmaX.Visible = false;
+            }
+            else
+            {
+                numericMinSigmaX.Visible = false;
+                numericMaxSigmaX.Visible = false;
+            }
+        }
+
+        private void radioMedian_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioMedian.Checked)
+            {
+                numericMinMask.Visible = true;
+                numericMaxMask.Visible = true;
+            }
+            else if (!radioGauss.Checked && !radioAvg.Checked && !radioKuwahara.Checked)
+            {
+                numericMinMask.Visible = false;
+                numericMaxMask.Visible = false;
+            }
+        }
+
+        private void radioBilateral_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioBilateral.Checked)
+            {
+                numericMinSigmaColor.Visible = true;
+                numericMaxSigmaColor.Visible = true;
+                numericMinSigmaSpace.Visible = true;
+                numericMaxSigmaSpace.Visible = true;
+            }
+            else
+            {
                 numericMinSigmaColor.Visible = false;
                 numericMaxSigmaColor.Visible = false;
                 numericMinSigmaSpace.Visible = false;
                 numericMaxSigmaSpace.Visible = false;
-                numericUnsharpMaskMin.Visible = false;
-                numericUnsharpMaskMax.Visible = false;
             }
         }
 
-        private void radioAvg_CheckedChanged(object sender, EventArgs e)
+        private void radioKuwahara_CheckedChanged(object sender, EventArgs e)
         {
-            numericMinMask.Visible = true;
-            numericMaxMask.Visible = true;
-            numericMinSigmaX.Visible = false;
-            numericMaxSigmaX.Visible = false;
-            numericMinSigmaColor.Visible = false;
-            numericMaxSigmaColor.Visible = false;
-            numericMinSigmaSpace.Visible = false;
-            numericMaxSigmaSpace.Visible = false;
-            numericUnsharpMaskMin.Visible = false;
-            numericUnsharpMaskMax.Visible = false;
+            if (radioKuwahara.Checked)
+            {
+                numericMinMask.Visible = true;
+                numericMaxMask.Visible = true;
+            }
+            else if (!radioGauss.Checked && !radioMedian.Checked && !radioAvg.Checked && !radioUnsharp.Checked)
+            {
+                numericMinMask.Visible = false;
+                numericMaxMask.Visible = false;
+            }
         }
 
-        private void radioGauss_Click(object sender, EventArgs e)
+        private void radioUnsharp_CheckedChanged(object sender, EventArgs e)
         {
-            numericMinMask.Visible = true;
-            numericMaxMask.Visible = true;
-            numericMinSigmaX.Visible = true;
-            numericMaxSigmaX.Visible = true;
-            numericMinSigmaColor.Visible = false;
-            numericMaxSigmaColor.Visible = false;
-            numericMinSigmaSpace.Visible = false;
-            numericMaxSigmaSpace.Visible = false;
-            numericUnsharpMaskMin.Visible = false;
-            numericUnsharpMaskMax.Visible = false;
-        }
-
-        private void radioNone_Click(object sender, EventArgs e)
-        {
-            numericMinMask.Visible = false;
-            numericMaxMask.Visible = false;
-            numericMinSigmaX.Visible = false;
-            numericMaxSigmaX.Visible = false;
-            numericMinSigmaColor.Visible = false;
-            numericMaxSigmaColor.Visible = false;
-            numericMinSigmaSpace.Visible = false;
-            numericMaxSigmaSpace.Visible = false;
-            numericUnsharpMaskMin.Visible = false;
-            numericUnsharpMaskMax.Visible = false;
-        }
-
-        private void radioMedian_Click(object sender, EventArgs e)
-        {
-            numericMinMask.Visible = true;
-            numericMaxMask.Visible = true;
-            numericMinSigmaX.Visible = false;
-            numericMaxSigmaX.Visible = false;
-            numericMinSigmaColor.Visible = false;
-            numericMaxSigmaColor.Visible = false;
-            numericMinSigmaSpace.Visible = false;
-            numericMaxSigmaSpace.Visible = false;
-            numericUnsharpMaskMin.Visible = false;
-            numericUnsharpMaskMax.Visible = false;
-        }
-
-        private void radioBilateral_Click(object sender, EventArgs e)
-        {
-            numericMinMask.Visible = false;
-            numericMaxMask.Visible = false;
-            numericMinSigmaX.Visible = false;
-            numericMaxSigmaX.Visible = false;
-            numericMinSigmaColor.Visible = true;
-            numericMaxSigmaColor.Visible = true;
-            numericMinSigmaSpace.Visible = true;
-            numericMaxSigmaSpace.Visible = true;
-            numericUnsharpMaskMin.Visible = false;
-            numericUnsharpMaskMax.Visible = false;
-        }
-
-        private void radioKuwahara_Click(object sender, EventArgs e)
-        {
-            numericMinMask.Visible = true;
-            numericMaxMask.Visible = true;
-            numericMinSigmaX.Visible = false;
-            numericMaxSigmaX.Visible = false;
-            numericMinSigmaColor.Visible = false;
-            numericMaxSigmaColor.Visible = false;
-            numericMinSigmaSpace.Visible = false;
-            numericMaxSigmaSpace.Visible = false;
-            numericUnsharpMaskMin.Visible = false;
-            numericUnsharpMaskMax.Visible = false;
-        }
-
-        private void radioUnsharp_Click(object sender, EventArgs e)
-        {
-            numericMinMask.Visible = true;
-            numericMaxMask.Visible = true;
-            numericMinSigmaX.Visible = false;
-            numericMaxSigmaX.Visible = false;
-            numericMinSigmaColor.Visible = false;
-            numericMaxSigmaColor.Visible = false;
-            numericMinSigmaSpace.Visible = false;
-            numericMaxSigmaSpace.Visible = false;
-            numericUnsharpMaskMin.Visible = true;
-            numericUnsharpMaskMax.Visible = true;
-        }
-
-        private void radioEqualize_Click(object sender, EventArgs e)
-        {
-            numericMinMask.Visible = false;
-            numericMaxMask.Visible = false;
-            numericMinSigmaX.Visible = false;
-            numericMaxSigmaX.Visible = false;
-            numericMinSigmaColor.Visible = false;
-            numericMaxSigmaColor.Visible = false;
-            numericMinSigmaSpace.Visible = false;
-            numericMaxSigmaSpace.Visible = false;
-            numericUnsharpMaskMin.Visible = false;
-            numericUnsharpMaskMax.Visible = false;
-        }
-
-        private void radioStretch_Click(object sender, EventArgs e)
-        {
-            numericMinMask.Visible = false;
-            numericMaxMask.Visible = false;
-            numericMinSigmaX.Visible = false;
-            numericMaxSigmaX.Visible = false;
-            numericMinSigmaColor.Visible = false;
-            numericMaxSigmaColor.Visible = false;
-            numericMinSigmaSpace.Visible = false;
-            numericMaxSigmaSpace.Visible = false;
-            numericUnsharpMaskMin.Visible = false;
-            numericUnsharpMaskMax.Visible = false;
-        }
+            if (radioUnsharp.Checked)
+            {
+                numericMinMask.Visible = true;
+                numericMaxMask.Visible = true;
+                numericUnsharpMaskMin.Visible = true;
+                numericUnsharpMaskMax.Visible = true;
+            }
+            else if (!radioGauss.Checked && !radioMedian.Checked && !radioAvg.Checked && !radioKuwahara.Checked)
+            {
+                numericMinMask.Visible = false;
+                numericMaxMask.Visible = false;
+                numericUnsharpMaskMin.Visible = false;
+                numericUnsharpMaskMax.Visible = false;
+            }
+            else
+            {
+                numericUnsharpMaskMin.Visible = false;
+                numericUnsharpMaskMax.Visible = false;
+            }
+        }        
 
 
         private void numericMinMask_ValueChanged(object sender, EventArgs e)
@@ -308,16 +256,21 @@ namespace praca_magisterska
                 return;
             }
 
-            if (checkBoxBatch.Checked)
-            {
-                string extensionPattern = @"\..{3}";
-                string pathPattern = @"^(.*?)_";
-                string numPicturePattern = @"\\i(.{2})";
-                sourcePath = Regex.Match(openFileDialog1.FileName, pathPattern);
-                extensionSourceFile = Regex.Match(openFileDialog1.FileName, extensionPattern);
-                numPicture = Regex.Match(openFileDialog1.FileName, numPicturePattern);
-                numPictureGood = Regex.Replace(numPicture.Value, "[^A-Za-z0-9 ]", "");
-            }
+            string extensionPattern = @"\..{3}";
+            string pathPattern = @"^(.*?)_";
+            string numPicturePattern = @"\\i(.{2})";
+            string numDistortionPattern = "_(.{2})_";
+            string numIntensityPattern = @"[1-5]\.";
+
+            sourcePath = Regex.Match(openFileDialog1.FileName, pathPattern);
+            extensionSourceFile = Regex.Match(openFileDialog1.FileName, extensionPattern);
+            numPicture = Regex.Match(openFileDialog1.FileName, numPicturePattern);
+            numPictureGood = Regex.Replace(numPicture.Value, "[^A-Za-z0-9 ]", "");
+            numDistortion = Regex.Match(openFileDialog1.FileName, numDistortionPattern);
+            numDistortionGood = Regex.Replace(numDistortion.Value, "[^A-Za-z0-9 ]", "");
+            numIntensity = Regex.Match(openFileDialog1.FileName, numIntensityPattern);
+            numIntensityGood = Regex.Replace(numIntensity.Value, "[^A-Za-z0-9 ]", "");
+
 
             Image<Bgr, byte>  imgToFilterResized = imgToFilter.Resize(imageBoxOriginal.Width, imageBoxFiltered.Height, Inter.Linear);
             imageBoxOriginal.Image = imgToFilterResized;

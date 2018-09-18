@@ -31,15 +31,14 @@
             this.components = new System.ComponentModel.Container();
             this.imageBoxOriginal = new Emgu.CV.UI.ImageBox();
             this.filtersBox = new System.Windows.Forms.GroupBox();
-            this.radioStretch = new System.Windows.Forms.RadioButton();
-            this.radioEqualize = new System.Windows.Forms.RadioButton();
-            this.radioUnsharp = new System.Windows.Forms.RadioButton();
-            this.radioKuwahara = new System.Windows.Forms.RadioButton();
-            this.radioBilateral = new System.Windows.Forms.RadioButton();
-            this.radioMedian = new System.Windows.Forms.RadioButton();
-            this.radioGauss = new System.Windows.Forms.RadioButton();
-            this.radioAvg = new System.Windows.Forms.RadioButton();
-            this.radioNone = new System.Windows.Forms.RadioButton();
+            this.radioStretch = new System.Windows.Forms.CheckBox();
+            this.radioEqualize = new System.Windows.Forms.CheckBox();
+            this.radioUnsharp = new System.Windows.Forms.CheckBox();
+            this.radioKuwahara = new System.Windows.Forms.CheckBox();
+            this.radioBilateral = new System.Windows.Forms.CheckBox();
+            this.radioMedian = new System.Windows.Forms.CheckBox();
+            this.radioGauss = new System.Windows.Forms.CheckBox();
+            this.radioAvg = new System.Windows.Forms.CheckBox();
             this.Start = new System.Windows.Forms.Button();
             this.imageBoxFiltered = new Emgu.CV.UI.ImageBox();
             this.listViewEval = new System.Windows.Forms.ListView();
@@ -99,7 +98,6 @@
             this.filtersBox.Controls.Add(this.radioMedian);
             this.filtersBox.Controls.Add(this.radioGauss);
             this.filtersBox.Controls.Add(this.radioAvg);
-            this.filtersBox.Controls.Add(this.radioNone);
             this.filtersBox.Location = new System.Drawing.Point(47, 23);
             this.filtersBox.Name = "filtersBox";
             this.filtersBox.Size = new System.Drawing.Size(200, 235);
@@ -110,110 +108,88 @@
             // radioStretch
             // 
             this.radioStretch.AutoSize = true;
-            this.radioStretch.Location = new System.Drawing.Point(6, 204);
+            this.radioStretch.Location = new System.Drawing.Point(7, 184);
             this.radioStretch.Name = "radioStretch";
-            this.radioStretch.Size = new System.Drawing.Size(146, 17);
-            this.radioStretch.TabIndex = 29;
-            this.radioStretch.TabStop = true;
+            this.radioStretch.Size = new System.Drawing.Size(147, 17);
+            this.radioStretch.TabIndex = 7;
             this.radioStretch.Text = "Rozciągnięcie histogramu";
             this.radioStretch.UseVisualStyleBackColor = true;
-            this.radioStretch.Click += new System.EventHandler(this.radioStretch_Click);
             // 
             // radioEqualize
             // 
             this.radioEqualize.AutoSize = true;
-            this.radioEqualize.Location = new System.Drawing.Point(6, 181);
+            this.radioEqualize.Location = new System.Drawing.Point(7, 161);
             this.radioEqualize.Name = "radioEqualize";
-            this.radioEqualize.Size = new System.Drawing.Size(138, 17);
-            this.radioEqualize.TabIndex = 28;
-            this.radioEqualize.TabStop = true;
+            this.radioEqualize.Size = new System.Drawing.Size(139, 17);
+            this.radioEqualize.TabIndex = 6;
             this.radioEqualize.Text = "Wyrównanie histogramu";
             this.radioEqualize.UseVisualStyleBackColor = true;
-            this.radioEqualize.Click += new System.EventHandler(this.radioEqualize_Click);
             // 
             // radioUnsharp
             // 
             this.radioUnsharp.AutoSize = true;
-            this.radioUnsharp.Location = new System.Drawing.Point(6, 158);
+            this.radioUnsharp.Location = new System.Drawing.Point(7, 138);
             this.radioUnsharp.Name = "radioUnsharp";
-            this.radioUnsharp.Size = new System.Drawing.Size(107, 17);
-            this.radioUnsharp.TabIndex = 9;
-            this.radioUnsharp.TabStop = true;
-            this.radioUnsharp.Text = "Unsharp masking";
+            this.radioUnsharp.Size = new System.Drawing.Size(119, 17);
+            this.radioUnsharp.TabIndex = 5;
+            this.radioUnsharp.Text = "Wyostrzanie obrazu";
             this.radioUnsharp.UseVisualStyleBackColor = true;
-            this.radioUnsharp.Click += new System.EventHandler(this.radioUnsharp_Click);
+            this.radioUnsharp.CheckedChanged += new System.EventHandler(this.radioUnsharp_CheckedChanged);
             // 
             // radioKuwahara
             // 
             this.radioKuwahara.AutoSize = true;
-            this.radioKuwahara.Location = new System.Drawing.Point(6, 135);
+            this.radioKuwahara.Location = new System.Drawing.Point(7, 115);
             this.radioKuwahara.Name = "radioKuwahara";
-            this.radioKuwahara.Size = new System.Drawing.Size(92, 17);
-            this.radioKuwahara.TabIndex = 8;
-            this.radioKuwahara.TabStop = true;
+            this.radioKuwahara.Size = new System.Drawing.Size(93, 17);
+            this.radioKuwahara.TabIndex = 4;
             this.radioKuwahara.Text = "Filtr Kuwahara";
             this.radioKuwahara.UseVisualStyleBackColor = true;
-            this.radioKuwahara.Click += new System.EventHandler(this.radioKuwahara_Click);
+            this.radioKuwahara.CheckedChanged += new System.EventHandler(this.radioKuwahara_CheckedChanged);
             // 
             // radioBilateral
             // 
             this.radioBilateral.AutoSize = true;
-            this.radioBilateral.Location = new System.Drawing.Point(6, 112);
+            this.radioBilateral.Location = new System.Drawing.Point(7, 92);
             this.radioBilateral.Name = "radioBilateral";
-            this.radioBilateral.Size = new System.Drawing.Size(91, 17);
-            this.radioBilateral.TabIndex = 7;
-            this.radioBilateral.TabStop = true;
+            this.radioBilateral.Size = new System.Drawing.Size(92, 17);
+            this.radioBilateral.TabIndex = 3;
             this.radioBilateral.Text = "Filtr bilateralny";
             this.radioBilateral.UseVisualStyleBackColor = true;
-            this.radioBilateral.Click += new System.EventHandler(this.radioBilateral_Click);
+            this.radioBilateral.CheckedChanged += new System.EventHandler(this.radioBilateral_CheckedChanged);
             // 
             // radioMedian
             // 
             this.radioMedian.AutoSize = true;
-            this.radioMedian.Location = new System.Drawing.Point(6, 89);
+            this.radioMedian.Location = new System.Drawing.Point(7, 69);
             this.radioMedian.Name = "radioMedian";
-            this.radioMedian.Size = new System.Drawing.Size(97, 17);
-            this.radioMedian.TabIndex = 6;
-            this.radioMedian.TabStop = true;
+            this.radioMedian.Size = new System.Drawing.Size(98, 17);
+            this.radioMedian.TabIndex = 2;
             this.radioMedian.Text = "Filtr medianowy";
             this.radioMedian.UseVisualStyleBackColor = true;
-            this.radioMedian.Click += new System.EventHandler(this.radioMedian_Click);
+            this.radioMedian.CheckedChanged += new System.EventHandler(this.radioMedian_CheckedChanged);
             // 
             // radioGauss
             // 
             this.radioGauss.AutoSize = true;
-            this.radioGauss.Location = new System.Drawing.Point(6, 66);
+            this.radioGauss.Location = new System.Drawing.Point(7, 46);
             this.radioGauss.Name = "radioGauss";
-            this.radioGauss.Size = new System.Drawing.Size(80, 17);
-            this.radioGauss.TabIndex = 5;
-            this.radioGauss.TabStop = true;
+            this.radioGauss.Size = new System.Drawing.Size(81, 17);
+            this.radioGauss.TabIndex = 1;
             this.radioGauss.Text = "Filtr Gaussa";
             this.radioGauss.UseVisualStyleBackColor = true;
-            this.radioGauss.Click += new System.EventHandler(this.radioGauss_Click);
+            this.radioGauss.CheckedChanged += new System.EventHandler(this.radioGauss_CheckedChanged);
             // 
             // radioAvg
             // 
             this.radioAvg.AutoSize = true;
-            this.radioAvg.Location = new System.Drawing.Point(6, 42);
+            this.radioAvg.Location = new System.Drawing.Point(7, 23);
             this.radioAvg.Name = "radioAvg";
-            this.radioAvg.Size = new System.Drawing.Size(103, 17);
-            this.radioAvg.TabIndex = 4;
-            this.radioAvg.Text = "Filtr uśredniający";
+            this.radioAvg.Size = new System.Drawing.Size(104, 17);
+            this.radioAvg.TabIndex = 0;
+            this.radioAvg.Text = "Filtr uśredniajacy";
             this.radioAvg.UseVisualStyleBackColor = true;
             this.radioAvg.CheckedChanged += new System.EventHandler(this.radioAvg_CheckedChanged);
-            // 
-            // radioNone
-            // 
-            this.radioNone.AutoSize = true;
-            this.radioNone.Checked = true;
-            this.radioNone.Location = new System.Drawing.Point(6, 19);
-            this.radioNone.Name = "radioNone";
-            this.radioNone.Size = new System.Drawing.Size(69, 17);
-            this.radioNone.TabIndex = 4;
-            this.radioNone.TabStop = true;
-            this.radioNone.Text = "Brak filtru";
-            this.radioNone.UseVisualStyleBackColor = true;
-            this.radioNone.Click += new System.EventHandler(this.radioNone_Click);
             // 
             // Start
             // 
@@ -302,13 +278,13 @@
             // numericMinSigmaX
             // 
             this.numericMinSigmaX.Increment = new decimal(new int[] {
-            30,
+            5,
             0,
             0,
             0});
             this.numericMinSigmaX.Location = new System.Drawing.Point(218, 49);
             this.numericMinSigmaX.Maximum = new decimal(new int[] {
-            151,
+            41,
             0,
             0,
             0});
@@ -331,13 +307,13 @@
             // numericMaxSigmaX
             // 
             this.numericMaxSigmaX.Increment = new decimal(new int[] {
-            30,
+            5,
             0,
             0,
             0});
             this.numericMaxSigmaX.Location = new System.Drawing.Point(264, 49);
             this.numericMaxSigmaX.Maximum = new decimal(new int[] {
-            151,
+            41,
             0,
             0,
             0});
@@ -360,13 +336,13 @@
             // numericMinSigmaColor
             // 
             this.numericMinSigmaColor.Increment = new decimal(new int[] {
-            30,
+            10,
             0,
             0,
             0});
             this.numericMinSigmaColor.Location = new System.Drawing.Point(218, 77);
             this.numericMinSigmaColor.Maximum = new decimal(new int[] {
-            152,
+            62,
             0,
             0,
             0});
@@ -389,13 +365,13 @@
             // numericMaxSigmaColor
             // 
             this.numericMaxSigmaColor.Increment = new decimal(new int[] {
-            30,
+            10,
             0,
             0,
             0});
             this.numericMaxSigmaColor.Location = new System.Drawing.Point(264, 77);
             this.numericMaxSigmaColor.Maximum = new decimal(new int[] {
-            152,
+            62,
             0,
             0,
             0});
@@ -418,13 +394,13 @@
             // numericMaxSigmaSpace
             // 
             this.numericMaxSigmaSpace.Increment = new decimal(new int[] {
-            30,
+            10,
             0,
             0,
             0});
             this.numericMaxSigmaSpace.Location = new System.Drawing.Point(264, 103);
             this.numericMaxSigmaSpace.Maximum = new decimal(new int[] {
-            152,
+            62,
             0,
             0,
             0});
@@ -447,13 +423,13 @@
             // numericMinSigmaSpace
             // 
             this.numericMinSigmaSpace.Increment = new decimal(new int[] {
-            30,
+            10,
             0,
             0,
             0});
             this.numericMinSigmaSpace.Location = new System.Drawing.Point(218, 103);
             this.numericMinSigmaSpace.Maximum = new decimal(new int[] {
-            152,
+            62,
             0,
             0,
             0});
@@ -483,7 +459,7 @@
             65536});
             this.numericUnsharpMaskMin.Location = new System.Drawing.Point(218, 129);
             this.numericUnsharpMaskMin.Maximum = new decimal(new int[] {
-            31,
+            26,
             0,
             0,
             65536});
@@ -513,7 +489,7 @@
             65536});
             this.numericUnsharpMaskMax.Location = new System.Drawing.Point(264, 129);
             this.numericUnsharpMaskMax.Maximum = new decimal(new int[] {
-            31,
+            26,
             0,
             0,
             65536});
@@ -645,7 +621,6 @@
             this.checkBoxBatch.TabIndex = 34;
             this.checkBoxBatch.Text = "Filtracja serii zdjęć";
             this.checkBoxBatch.UseVisualStyleBackColor = true;
-            this.checkBoxBatch.CheckedChanged += new System.EventHandler(this.checkBoxBatch_CheckedChanged);
             // 
             // checkBoxData
             // 
@@ -700,13 +675,8 @@
 
         private Emgu.CV.UI.ImageBox imageBoxOriginal;
         private System.Windows.Forms.GroupBox filtersBox;
-        private System.Windows.Forms.RadioButton radioAvg;
-        private System.Windows.Forms.RadioButton radioNone;
         private System.Windows.Forms.Button Start;
         private Emgu.CV.UI.ImageBox imageBoxFiltered;
-        private System.Windows.Forms.RadioButton radioBilateral;
-        private System.Windows.Forms.RadioButton radioMedian;
-        private System.Windows.Forms.RadioButton radioGauss;
         private System.Windows.Forms.ListView listViewEval;
         private System.Windows.Forms.NumericUpDown numericMinMask;
         private System.Windows.Forms.NumericUpDown numericMaxMask;
@@ -716,12 +686,8 @@
         private System.Windows.Forms.NumericUpDown numericMaxSigmaColor;
         private System.Windows.Forms.NumericUpDown numericMaxSigmaSpace;
         private System.Windows.Forms.NumericUpDown numericMinSigmaSpace;
-        private System.Windows.Forms.RadioButton radioKuwahara;
-        private System.Windows.Forms.RadioButton radioUnsharp;
         private System.Windows.Forms.NumericUpDown numericUnsharpMaskMin;
         private System.Windows.Forms.NumericUpDown numericUnsharpMaskMax;
-        private System.Windows.Forms.RadioButton radioEqualize;
-        private System.Windows.Forms.RadioButton radioStretch;
         private System.Windows.Forms.GroupBox parametersBox;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
@@ -734,6 +700,14 @@
         private System.Windows.Forms.Button LoadOrgImg;
         private System.Windows.Forms.CheckBox checkBoxBatch;
         private System.Windows.Forms.CheckBox checkBoxData;
+        private System.Windows.Forms.CheckBox radioStretch;
+        private System.Windows.Forms.CheckBox radioEqualize;
+        private System.Windows.Forms.CheckBox radioUnsharp;
+        private System.Windows.Forms.CheckBox radioKuwahara;
+        private System.Windows.Forms.CheckBox radioBilateral;
+        private System.Windows.Forms.CheckBox radioMedian;
+        private System.Windows.Forms.CheckBox radioGauss;
+        private System.Windows.Forms.CheckBox radioAvg;
     }
 }
 
